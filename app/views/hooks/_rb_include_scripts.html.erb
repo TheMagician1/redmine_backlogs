@@ -4,7 +4,9 @@
 <%= stylesheet_link_tag 'sprints_roadmap.css', :plugin => 'redmine_backlogs' %>
 <%= # redmine uses new jquery, need some compat libs
     if check_redmine_version_ge(2, 5)
-      javascript_include_tag('jquery/jquery.jqplot/jquery.browser.js', :plugin => 'redmine_backlogs')
+      javascript_include_tag('jquery/jquery.jqplot/jquery.browser.js',
+                             'jquery/jquery.ui.touch-punch.min.js',
+                             :plugin => 'redmine_backlogs')
     end
 %>
 <%= javascript_include_tag 'jquery-migrate-1.4.1.min.js', :plugin => 'redmine_backlogs' %>
