@@ -43,7 +43,7 @@ object_to_prepare.to_prepare do
 
   require_dependency 'backlogs_printable_cards'
   require_dependency 'linear_regression'
-  
+
   require_dependency 'backlogs_projects_helper_override'
   require_dependency 'backlogs_application_helper_override'
   require_dependency 'backlogs_queries_helper_override'
@@ -109,7 +109,7 @@ Redmine::Plugin.register :redmine_backlogs do
     permission :configure_backlogs,   { rb_project_settings: :project_settings }
     permission :view_master_backlog,  {
                                         rb_master_backlogs:  [:show, :menu, :closed_sprints],
-                                        rb_sprints:          [:index, :show, :download],
+                                        rb_sprints:          [:index, :show, :download, :backlog],
                                         rb_sprints_roadmap:  [:index, :show, :download],
                                         rb_hooks_render:     [:view_issues_sidebar],
                                         rb_wikis:            :show,

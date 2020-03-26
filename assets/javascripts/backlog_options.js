@@ -5,10 +5,12 @@ RB.BacklogOptions = RB.Object.create({
     var me = this,
       _ = RB.constants.locale._;
 
-    // prepare container
+      // prepare container
     RB.$('#toolbar').
       append( RB.$('<div class="tb_mnu_btn" />').
               append( (me.el = RB.$('<select class="view_options_menu" />') )));
+    this.$ = me.el;
+    this.$.data('this', this);
 
     // load hidden sprint ids from cookie
     var hidden = this.loadState();
@@ -62,6 +64,13 @@ RB.BacklogOptions = RB.Object.create({
         optGrpselector: selector
       };
     });
+  },
+
+  analyse_backlog: function() {
+    _ = RB.constants.locale._;
+    var hidden = this.loadState();
+    this._init_backlogs('#sprint_backlogs_container', _('Sprints'), hidden);
+    this._init_backlogs('#product_backlog_container', _('Backlogs'), hidden);
   },
 
   updateUI: function() {

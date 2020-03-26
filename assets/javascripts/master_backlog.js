@@ -3,6 +3,21 @@ RB.$(function() {
   // Initialize each backlog
   RB.BacklogOptionsInstance = RB.Factory.initialize(RB.BacklogOptions, this);
   RB.Factory.initialize(RB.BacklogMultilineBtn, RB.$('#multiline'));
+  RB.$('.sprint_container').each(function(index){
+    var element = this;
+    var elem_id = $(this).attr('sprint_id');
+    if (elem_id == "" && elem_id == "0") {
+      elem_id = 1 // temporary fix
+    }
+    $(this).load(
+      RB.urlFor('backlog_sprint', { id: elem_id }),
+      function(){
+        RB.Factory.initialize(RB.Backlog, element.children[0]);
+        RB.util.initToolTip();
+        RB.BacklogOptions.initialize(RB.$('<div class="tb_mnu_btn" />'));
+      });
+    });
+
   RB.$('.backlog').each(function(index){
     RB.Factory.initialize(RB.Backlog, this);
   });

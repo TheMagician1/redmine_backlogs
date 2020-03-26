@@ -128,4 +128,12 @@ class RbSprintsController < RbApplicationController
     redirect_to controller: 'rb_master_backlogs', action: 'show', project_id: @project
   end
 
+  def backlog
+    respond_to do |format|
+      format.html {
+        render partial: "backlog"
+      }
+    end
+  end
+
 end

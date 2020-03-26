@@ -90,6 +90,7 @@ def rb_common_routes(rb)
   rb_match rb, 'sprint/:sprint_id/update', to: 'rb_sprints#update', via: [:post, :put]
   rb_match rb, 'sprint/:sprint_id/close', to: 'rb_sprints#close', via: [:get, :post, :put]
   rb_match rb, 'sprint/:sprint_id/reset', to: 'rb_sprints#reset', via: [:post, :put, :get]
+  rb_match rb, 'sprint/:sprint_id/backlog', to: 'rb_sprints#backlog', via: [:get]
   rb_match rb, 'sprint/download/:sprint_id.xml', to: 'rb_sprints#download', format: 'xml', via: [:get]
   rb_match rb, 'sprints/:project_id/close_completed', to: 'rb_sprints#close_completed', via: [:put]
 
@@ -173,13 +174,13 @@ else
   rb_common_routes rb
 
   resources :genericboards, controller: :rb_genericboards_admin, via: [:get]
-  
+
   resources :release, controller: :rb_releases, only: [:show, :destroy, :edit, :update], param: :release_id
 
   resources :issue_release, controller: :rb_issue_release, param: :issue_release_id
-  
+
   resources :sprint, controller: :rb_sprints_roadmap, only: [:show, :destroy, :edit, :update], param: :sprint_id
-  
+
   resources :task, except: :index, controller: :rb_tasks
   # release notes
   resources :release_notes, controller: :release_notes, only: [:create, :update, :destroy]

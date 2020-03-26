@@ -35,6 +35,7 @@ if (!RB.constants) {
   RB.routes = {
     create_sprint: <%= url_for(:controller => 'rb_sprints', :action => 'create').to_json.html_safe %>,
     update_sprint: <%= url_for(:controller => 'rb_sprints', :action => 'update', :sprint_id => ':id').to_json.html_safe %>,
+    backlog_sprint: <%= url_for(:controller => 'rb_sprints', :action => 'backlog', :sprint_id => ':id').to_json.html_safe %>,
     update_release: <%= url_for(:controller => 'rb_releases', :action => 'update', :release_id => ':id').to_json.html_safe %>,
 
     create_epic: <%= url_for(:controller => 'rb_epics', :action => 'create').to_json.html_safe %>,
@@ -134,7 +135,7 @@ RB.constants.task_states = <%= workflow_transitions(RbTask).to_json.html_safe %>
  project_versions maps all projects to those versions which can receive the projects issues.
  project_versions are used by the js user interface to determine to which backlogs a dragged story can be dropped to.
  It uses the project_id attached to the story and checks all visible sprints if it is in the array hashed to the project_id here.
- We need to provide maps to at lest all projects which we find in visible versions AND all self_and_descendants for the product backlog. 
+ We need to provide maps to at lest all projects which we find in visible versions AND all self_and_descendants for the product backlog.
  An approximation would be all projects which all visible sprints are shared in plus self_and_descendants.
  Most simple way: use all projects the user can see, trading some bytes of bandwidth against many server cycles of comparison and filtering.
 =end

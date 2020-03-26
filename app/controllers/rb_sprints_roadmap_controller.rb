@@ -40,7 +40,7 @@ class RbSprintsRoadmapController < RbApplicationController
         else
           sprints += @project.closed_shared_sprints
         end
-        
+
         @stories_by_sprint = {}
         if @selected_tracker_ids.any? && sprints.any?
           @stories_by_sprint = RbStory.backlogs_by_sprint(@project, sprints)
@@ -52,8 +52,7 @@ class RbSprintsRoadmapController < RbApplicationController
   def show
     respond_to do |format|
       format.html {
-        @sprint = RbSprint.find(params[:sprint_id])
-        @stories = RbStory.sprint_backlog(@sprint)
+        @stories = @sprint.stories
       }
     end
   end
