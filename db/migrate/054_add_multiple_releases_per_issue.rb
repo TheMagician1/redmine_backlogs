@@ -1,4 +1,4 @@
-class AddMultipleReleasesPerIssue < ActiveRecord::Migration
+class AddMultipleReleasesPerIssue < ActiveRecord::Migration[5.2]
   def self.up
     create_table :rb_issue_releases do |t|
       t.references :issue

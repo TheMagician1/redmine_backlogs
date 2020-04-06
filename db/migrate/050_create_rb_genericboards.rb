@@ -1,4 +1,4 @@
-class CreateRbGenericboards < ActiveRecord::Migration
+class CreateRbGenericboards < ActiveRecord::Migration[5.2]
   def change
     create_table :rb_genericboards do |t|
       t.string :name

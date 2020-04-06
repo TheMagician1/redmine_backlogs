@@ -1,4 +1,4 @@
-class AddDefaultSprintRelease < ActiveRecord::Migration
+class AddDefaultSprintRelease < ActiveRecord::Migration[5.2]
   def self.up
     unless ActiveRecord::Base.connection.column_exists?(:versions, :release_id)
       add_column :versions, :release_id, :integer

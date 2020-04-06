@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License along with
 # redmine_release_notes. If not, see <http://www.gnu.org/licenses/>.
 
-class DoEverythingForVersion130 < ActiveRecord::Migration
+class DoEverythingForVersion130 < ActiveRecord::Migration[5.2]
   def up
     change_table :release_notes do |t|
       t.column :status,   :string,  limit: 12

@@ -58,7 +58,7 @@ namespace :redmine do
         Backlogs.setting[:card_spec] = BacklogsPrintableCards::CardPageLayout.available[0]
       end
 
-      trackers = Tracker.find(:all)
+      trackers = Tracker.all
 
       if ENV['epic_trackers'] && ENV['epic_trackers'] != ''
         trackers =  ENV['epic_trackers'].split(',')
@@ -131,7 +131,7 @@ namespace :redmine do
           while invalid
             puts "-----------------------------------------------------"
             puts "Which trackers do you want to use for your stories?"
-            available_trackers = trackers.select{|t| !Backlogs.setting[:epics_trackers].include? t.id}
+            available_trackers = trackers.select{|t| !Backlogs.setting[:epic_trackers].include? t.id}
             available_trackers.each_with_index { |t, i| puts "  #{ i + 1 }. #{ t.name }" }
             print "Separate values with a space (e.g. 1 3): "
             STDOUT.flush
@@ -177,12 +177,12 @@ namespace :redmine do
         if !RbTask.tracker
           # Check if there is at least one tracker available
           puts "-----------------------------------------------------"
-          if (Backlogs.setting[:story_trackers].length + Backlogs.setting[:epics_trackers].length) < trackers.length
+          if (Backlogs.setting[:story_trackers].length + Backlogs.setting[:epic_trackers].length) < trackers.length
             invalid = true
             while invalid
               # If there's at least one, ask the user to pick one
               puts "Which tracker do you want to use for your tasks?"
-              available_trackers = trackers.select{|t| !Backlogs.setting[:epics_trackers].include? t.id}
+              available_trackers = trackers.select{|t| !Backlogs.setting[:epic_trackers].include? t.id}
               available_trackers = available_trackers.select{|t| !Backlogs.setting[:story_trackers].include? t.id}
               j = 0
               available_trackers.each_with_index { |t, i| puts "  #{ j = i + 1 }. #{ t.name }" }
