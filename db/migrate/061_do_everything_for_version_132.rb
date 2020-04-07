@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License along with
 # redmine_release_notes. If not, see <http://www.gnu.org/licenses/>.
 
-class DoEverythingForVersion132 < ActiveRecord::Migration
+class DoEverythingForVersion132 < ActiveRecord::Migration[5.2]
   def up
     change_column :release_notes_formats, :header, :text, limit: 16.megabytes - 1
     change_column :release_notes_formats, :each_issue, :text, limit: 16.megabytes - 1

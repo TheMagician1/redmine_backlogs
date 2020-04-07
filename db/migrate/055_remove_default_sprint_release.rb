@@ -1,4 +1,4 @@
-class RemoveDefaultSprintRelease < ActiveRecord::Migration
+class RemoveDefaultSprintRelease < ActiveRecord::Migration[5.2]
   def self.up
     if ActiveRecord::Base.connection.column_exists?(:versions, :release_id)
       remove_column :versions, :release_id

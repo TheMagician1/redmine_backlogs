@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License along with
 # redmine_release_notes. If not, see <http://www.gnu.org/licenses/>.
 
-class CreateReleaseNotes < ActiveRecord::Migration
+class CreateReleaseNotes < ActiveRecord::Migration[5.2]
   def up
   	create_table :release_notes do |t|
     	t.column :issue_id, :integer

@@ -1,4 +1,4 @@
-class CreateRbReleasePlanning < ActiveRecord::Migration
+class CreateRbReleasePlanning < ActiveRecord::Migration[5.2]
   def self.up
     create_table :rb_release_plannings do |t|
       t.string :name

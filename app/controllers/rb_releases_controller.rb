@@ -24,7 +24,7 @@ class RbReleasesController < RbApplicationController
   def new
     @release = RbRelease.new(project: @project)
     if request.post?
-      @release.attributes = params[:release]
+      @release.attributes = release_params
       if @release.save
         flash[:notice] = l(:notice_successful_create)
         redirect_to action: 'index', project_id: @project

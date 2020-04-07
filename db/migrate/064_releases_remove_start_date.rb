@@ -1,4 +1,4 @@
-class ReleasesRemoveStartDate < ActiveRecord::Migration
+class ReleasesRemoveStartDate < ActiveRecord::Migration[5.2]
   def self.up
     remove_columns :releases, :release_start_date
   end
