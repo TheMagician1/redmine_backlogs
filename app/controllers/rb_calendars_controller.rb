@@ -23,7 +23,7 @@ class RbCalendarsController < RbApplicationController
     cal = Icalendar::Calendar.new
 
     # current + future sprints
-    RbSprint.find(:all, conditions: ["not sprint_start_date is null and not effective_date is null and project_id = ? and effective_date >= ?", @project.id, Date.today]).each {|sprint|
+    RbSprint.where("not sprint_start_date is null and not effective_date is null and project_id = ? and effective_date >= ?", @project.id, Date.today).each {|sprint|
       summary_text = l(:event_sprint_summary, { project: @project.name, summary: sprint.name } )
       description_text = "#{sprint.name}: #{url_for(controller: 'rb_queries', only_path: false, action: 'show', project_id: @project.id, sprint_id: sprint.id)}\n#{sprint.description}"
 

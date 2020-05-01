@@ -41,7 +41,7 @@ class ReinstateRemaining < ActiveRecord::Migration[5.2]
       Issue.reset_column_information
       throw :done if Issue.column_names.include?('remaining_hours')
 
-      add_column :issues, :remaining_hours, :float            
+      add_column :issues, :remaining_hours, :float
 
       execute "update issues set created_on = updated_on where created_on is NULL"
 
@@ -50,7 +50,7 @@ class ReinstateRemaining < ActiveRecord::Migration[5.2]
 
       throw :done if trackers.size == 0 || projects.size == 0
 
-      issues = RbTask.find(:all, conditions: ['project_id in (?) and tracker_id in (?)', projects, trackers]).to_a
+      issues = RbTask.where('project_id in (?) and tracker_id in (?)', projects, trackers).to_a
       converted = 0
 
       puts "Reverting estimated hours for #{issues.size} issues. This will take a while. Sorry."
