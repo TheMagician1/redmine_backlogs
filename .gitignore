@@ -1,5 +1,6 @@
 .bundle
 # Ignore any accidental remnants from gh-pages branch
+.idea
 _site
 _posts
 assets/styles
