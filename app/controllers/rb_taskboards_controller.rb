@@ -19,7 +19,7 @@ class RbTaskboardsController < RbApplicationController
       enabled = {}
       statuses.each{|s| enabled[s.id] = false}
       # enable all statuses held by current tasks, regardless of whether the current user has access
-      RbTask.find(:all, conditions: ['fixed_version_id = ?', @sprint.id]).each {|task| enabled[task.status_id] = true }
+      RbTask.where('fixed_version_id = ?', @sprint.id).each {|task| enabled[task.status_id] = true }
 
       roles = User.current.roles_for_project(@project)
       #@transitions = {}
