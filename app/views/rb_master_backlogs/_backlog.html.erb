@@ -13,6 +13,6 @@
     <%- end %>
   </div>
   <ul id="stories-for-<%= backlog[:sprint] ? backlog[:sprint].id : 'product-backlog' %>" class="stories">
-    <%= render :partial => "rb_stories/story", :collection => backlog[:stories] %>
+    <%= render :partial => "rb_stories/story", :collection => backlog[:stories], cached: true %>
   </ul>
 </div>
