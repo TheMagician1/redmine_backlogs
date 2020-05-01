@@ -148,6 +148,7 @@ ul.ui-sortable {
 
 .backlog_tooltip {
   font-size: 1em;
+  max-height: 400px;
 }
 
 .backlog_tooltip .header {
@@ -172,4 +173,16 @@ ul.ui-sortable {
 .backlog_tooltip .value {
   margin-left: .5em;
   float: left;
+}
+
+.backlog_tooltip table {
+  border: solid;
+  border-collapse: collapse;
+}
+
+.backlog_tooltip table,
+.backlog_tooltip th,
+.backlog_tooltip td {
+  border: solid;
+  padding: 3px;
 }
