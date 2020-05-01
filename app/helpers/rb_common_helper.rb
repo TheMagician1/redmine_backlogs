@@ -35,7 +35,7 @@ module RbCommonHelper
       "style='#{build_user_style(task.assigned_to)}'"
     end
   end
-  
+
   def build_user_style(user)
       color_to = user.backlogs_preference[:task_color]
       color_from = Backlogs::Color.new(color_to).lighten(0.5)
@@ -95,12 +95,12 @@ color: #{front_color};"
     if story.new_record?
       return "new"
     end
-    
+
     scrumstatus = story.status.backlog(story.tracker)
     return "todo" if scrumstatus == :new
     return "inprogress" if scrumstatus == :in_progress
-    return "closed accepted" if scrumstatus == :success 
-    return "closed rejected" if scrumstatus == :failure 
+    return "closed accepted" if scrumstatus == :success
+    return "closed rejected" if scrumstatus == :failure
   end
 
   def get_story_points_map
@@ -238,7 +238,7 @@ color: #{front_color};"
     res += '</div></div>'
     res.html_safe
   end
-  
+
   def tooltip_story_points_or_empty(tooltip)
     return '' if tooltip.story_points.blank?
     tooltip_line_key :story_points, story_points_or_empty(tooltip), 'story_points'
@@ -388,7 +388,7 @@ color: #{front_color};"
   # Convert selected ids to integer and remove blank values.
   def selected_ids(options)
     return nil if options.nil?
-    options.collect{|o| o.to_i unless o.blank?}.compact! 
+    options.collect{|o| o.to_i unless o.blank?}.compact!
   end
 
   def format_release_sharing(v)
@@ -420,7 +420,7 @@ color: #{front_color};"
 
   # def_rb_partial_method 'render_rb_task(task)', 'rb_tasks/_task.html.erb'
   def render_rb_task(task)
-    render partial: 'rb_tasks/task', locals: { task: task }
+    render partial: 'rb_tasks/task', locals: { task: task }, cached: true
   end
 
   def render_rb_task_collection(tasks)
