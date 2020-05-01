@@ -3,59 +3,59 @@
   <%- story_color = nil %>
   <%- front_color = nil %>
   <%- if User.current.backlogs_preference[:show_backlog_story_color] == '1' && story.assigned_to.present? && story.assigned_to.is_a?(User) %>
-	  <%- story_color = story.assigned_to.backlogs_preference[:task_color] %>
-	  <%- front_color = story.assigned_to.backlogs_preference[:task_front_color] %>
+    <%- story_color = story.assigned_to.backlogs_preference[:task_color] %>
+    <%- front_color = story.assigned_to.backlogs_preference[:task_front_color] %>
   <%- end %>
   <%- show_assigned_to_full = User.current.backlogs_preference[:show_assigned_to_full] == '1' %>
   <%- show_assigned_to_short = User.current.backlogs_preference[:show_assigned_to_short] == '1' %>
   <%- show_category = User.current.backlogs_preference[:show_category] == '1' %>
- <div class="fff-wrapmiddle">
-   <div class="story_field fff-middle">
-     <%- if show_category %>
-         <% category_style = story.category ? 'display: inline;' : 'display: none;' %>
-         <div style="display: inline; white-space: nowrap;">
-           <div class="category start_edit" style="<%= category_style %>"><%= h story.category.to_s + ' ' if story.category %></div>
-     <%- end %>
-     <span class="editable subject" fieldname="subject" fieldlabel="<%=l(:field_subject)%>" fieldtype="textarea"><%=h story.subject %></span>
-     <%- if Backlogs.setting[:show_backlog_story_markers_master_backlog] %>
-     <%- story_mark = add_marker_to_stories(story)%>
-     <%- if !story_mark.blank? %>
-     <span class="story_mark start_edit">- <%=story_mark %></span>
-     <%- end %>
-     <%- end %>
-     <%- if show_category %>
+  <div class="fff-wrapmiddle">
+    <div class="story_field fff-middle">
+      <%- if show_category %>
+        <% category_style = story.category ? 'display: inline;' : 'display: none;' %>
+        <div style="display: inline; white-space: nowrap;">
+          <div class="category start_edit" style="<%= category_style %>"><%= h story.category.to_s + ' ' if story.category %></div>
+      <%- end %>
+      <span class="editable subject" fieldname="subject" fieldlabel="<%=l(:field_subject)%>" fieldtype="textarea"><%=h story.subject %></span>
+      <%- if Backlogs.setting[:show_backlog_story_markers_master_backlog] %>
+      <%- story_mark = add_marker_to_stories(story)%>
+      <%- if !story_mark.blank? %>
+      <span class="story_mark start_edit">- <%=story_mark %></span>
+      <%- end %>
+      <%- end %>
+      <%- if show_category %>
           </div>
-     <%- end %>
-     <%- if Backlogs.setting[:show_estimated_hours] %>
-     <span class="story_field start_edit">(<%= story.estimated_hours.to_f %> est h, <%= story.priority.name %>)</span>
-     <%- end %>
-     <%- if story.assigned_to %>
-         <%- if show_assigned_to_full %>
-           <div class="assigned_to_full start_edit"> - 
-           <%- if story_color %>
-           		<span class="assigned_to_color" style="background-color: <%= story_color %>; border-color: <%= story_color %>; color: <%= front_color %>;">
-           <%- end %>
-				<%= story.assigned_to%>
-           <%- if story_color %>
-				</span>
-		   <%- end %>
-		   </div>
-         <%- end %>
-         <%- if show_assigned_to_short %>
-			<div class="assigned_to_short start_edit"> - 
-	        <%- if story_color %>
-           		<span class="assigned_to_color" style="background-color: <%= story_color %>; border-color: <%= story_color %>; color: <%= front_color %>;">
-           <%- end %>
-           <%= story.assigned_to.firstname[0]%>. <%= story.assigned_to.lastname[0]%>.
-           <%- if story_color %>
-				</span>
-		   <%- end %>
-		   </div>
-         <%- end %>
-     <%- end %>
+      <%- end %>
+      <%- if Backlogs.setting[:show_estimated_hours] %>
+      <span class="story_field start_edit">(<%= story.estimated_hours.to_f %> est h, <%= story.priority.name %>)</span>
+      <%- end %>
+      <%- if story.assigned_to.present? %>
+        <%- if show_assigned_to_full %>
+          <div class="assigned_to_full start_edit"> -
+          <%- if story_color %>
+              <span class="assigned_to_color" style="background-color: <%= story_color %>; border-color: <%= story_color %>; color: <%= front_color %>;">
+          <%- end %>
+        <%= story.assigned_to %>
+          <%- if story_color %>
+        </span>
+      <%- end %>
+      </div>
+        <%- end %>
+        <%- if show_assigned_to_short %>
+      <div class="assigned_to_short start_edit"> -
+          <%- if story_color %>
+               <span class="assigned_to_color" style="background-color: <%= story_color %>; border-color: <%= story_color %>; color: <%= front_color %>;">
+          <%- end %>
+          <%= story.assigned_to.firstname[0]%>. <%= story.assigned_to.lastname[0]%>.
+          <%- if story_color %>
+        </span>
+      <%- end %>
+      </div>
+      <%- end %>
+    <%- end %>
   </div>
- </div>
- <div class="fff-left">
+</div>
+<div class="fff-left">
     <%- qtip_cls = "story_tooltip"
        qtip_cls = "story_tooltip_ajax" unless defined?(render_tooltip)  %>
   <div class="id <%= qtip_cls %> story_field">
@@ -78,7 +78,7 @@
     <div class="t"><%= h tracker_name_or_empty(story) %></div>
     <div class="v"><%= tracker_id_or_empty(story) %></div>
   </div>
-  
+
   <%- if show_category %>
   <div class="editable category" fieldtype="select" fieldname="category_id" style="display: none;">
     <div class="t" style="display: inline"><%= h story.category.to_s+' - ' if story.category %></div>
@@ -86,12 +86,12 @@
   </div>
   <%- end %>
 
- </div>
- <div class="fff-right">
-   <div class="assigned_to_id editable story_field" fieldtype="select" style="display: none;" fieldname="assigned_to_id" fieldlabel="<%=l(:field_assigned_to)%>">
-     <div class="t"><%= assignee_name_or_empty(story) %></div>
-     <div class="v"><%= assignee_id_or_empty(story) %></div>
-   </div>
+</div>
+<div class="fff-right">
+  <div class="assigned_to_id editable story_field" fieldtype="select" style="display: none;" fieldname="assigned_to_id" fieldlabel="<%=l(:field_assigned_to)%>">
+    <div class="t"><%= assignee_name_or_empty(story) %></div>
+    <div class="v"><%= assignee_id_or_empty(story) %></div>
+  </div>
   <div class="status_id editable story_field" fieldtype="select" fieldname="status_id" fieldlabel="<%=l(:field_status_id)%>">
     <div class="t"><%= status_label_or_default(story) %></div>
     <div class="v"><%= status_id_or_default(story) %></div>
@@ -119,7 +119,7 @@
   <div class="meta">
     <%= render :partial => "backlogs/model_errors", :object => story.errors unless story.errors.empty? %>
   </div>
- </div>
-  <div class="clearfix"></div>
+</div>
+<div class="clearfix"></div>
 </li>
 <% end %>
