@@ -1,3 +1,4 @@
+<% cache story do %>
 <li class="model <%= story.backlogs_issue_type %> fff-wrapper <%= mark_if_closed(story) %> tracker<%= story ? story.tracker_id : '' %>" id="<%= story_html_id_or_empty(story) %>" story ="story_<%=story.id%>">
   <%- story_color = nil %>
   <%- front_color = nil %>
@@ -121,3 +122,4 @@
  </div>
   <div class="clearfix"></div>
 </li>
+<% end %>
