@@ -130,7 +130,7 @@ filter:progid:DXImageTransform.Microsoft.Gradient(Enabled=1,GradientType=0,Start
           <td class="swimlane list" id="<%= row.id %>_<%= col.id %>" _col_id="<%= col.id %>">
             <div class="generic_addbtn"></div>
             <% if (@elements_by_cell.include? row.id) && (@elements_by_cell[row.id].include? col.id) %>
-              <%= render :partial => "generic", :collection => @elements_by_cell[row.id][col.id], :locals => { :cls => 'task' }%>
+              <%= render :partial => "generic", :collection => @elements_by_cell[row.id][col.id], :locals => { :cls => 'task' } cached: true %>
             <% end %>
           </td>
           <% end %>

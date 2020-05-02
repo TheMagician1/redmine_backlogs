@@ -1,3 +1,5 @@
+<% cache story do %>
+
 <div class="model issue story <%= mark_scrum_status(story) %> tracker<%= story ? story.tracker_id : '' %>"  <%= build_inline_style(story).html_safe %> id="<%= story_html_id_or_empty(story) %>" _view="story_eb">
   <div class="id story_tooltip story_field">
     <div class="tooltip_text"><%= render :partial => "rb_stories/tooltip", :object => story %></div>
@@ -46,3 +48,4 @@
   </div>
   <div class="clearfix"></div>
 </div>
+<% end %>

@@ -50,7 +50,7 @@
         <%- @columns.each do |col| %>
           <%=
           list = col[:stories].select{|s| s.kind_of?(RbStory) and s.parent_id == epic.id}
-          render :partial => "rb_stories/story_eb", :collection => list, :as => :story
+          render :partial => "rb_stories/story_eb", :collection => list, :as => :story, cached: true
           %>
 	      <% end %>
       </td>
