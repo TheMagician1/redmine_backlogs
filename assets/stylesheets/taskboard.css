@@ -97,7 +97,9 @@ See RB.Taskboard.initialize()
 }
 .board .add_new{
   display: inline-block;
-  vertical-align:middle;
+  vertical-align: middle;
+  font-size: 1.3em;
+  color: forestgreen;
 }
 .board .add_new:hover{
   cursor:pointer;

@@ -87,9 +87,7 @@
     <tr>
       <td><div class="label_sprint_impediments">
             <% if User.current.allowed_to?(:create_impediments, @project) %>
-            <span class="add_new">
-              <%= image_tag("add.png", :alt => "+") %>
-            </span>
+            <span class="fas fa-plus-circle add_new" title="<%= l("add_new_impediment") %>"></span>
             <% end %>
             <%= l(:label_sprint_impediments) %>
       </div></td>
@@ -150,7 +148,7 @@
     <%- end %>
   </select>
   <%- end -%>
-  
+
   <%- if User.current.backlogs_preference[:show_category] == '1' %>
   <select class="category_id helper" id="category_id_options">
     <option value=""></option>

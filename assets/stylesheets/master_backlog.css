@@ -151,8 +151,8 @@ ul li { vertical-align: bottom; } /* close IE7 gap between list items */
 
 #backlogs_container .header .menu .icon{
   position:relative;
-  left:7px;
-  top:7px;
+  left:9px;
+  top:9px;
   padding: 0;
 }
 
