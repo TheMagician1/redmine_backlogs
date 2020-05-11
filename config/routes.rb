@@ -115,7 +115,7 @@ def rb_common_routes(rb)
   rb_match rb, 'hooks/sidebar/project/:project_id/:sprint_id',
           to: 'rb_hooks_render#view_issues_sidebar'
 
-  rb_match rb, 'project/:project_id/backlogs', to: 'rb_project_settings#project_settings'
+  rb_match rb, 'project/:project_id/backlogs', to: 'rb_project_settings#project_settings', via: [:post]
 
   rb_match rb, 'projects/:project_id/genericboard',
           to: 'rb_genericboards#index', via: [:get]
@@ -173,13 +173,13 @@ else
   rb_common_routes rb
 
   resources :genericboards, controller: :rb_genericboards_admin, via: [:get]
-  
+
   resources :release, controller: :rb_releases, only: [:show, :destroy, :edit, :update], param: :release_id
 
   resources :issue_release, controller: :rb_issue_release, param: :issue_release_id
-  
+
   resources :sprint, controller: :rb_sprints_roadmap, only: [:show, :destroy, :edit, :update], param: :sprint_id
-  
+
   resources :task, except: :index, controller: :rb_tasks
   # release notes
   resources :release_notes, controller: :release_notes, only: [:create, :update, :destroy]

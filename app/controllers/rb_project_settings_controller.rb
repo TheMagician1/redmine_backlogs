@@ -7,13 +7,16 @@ class RbProjectSettingsController < RbApplicationController
   def project_settings
     enabled = false
     enabled_scrum_stats = false
+    enabled_use_epicboard = false
     if request.post? and params[:settings]
       enabled = true if params[:settings]["show_stories_from_subprojects"]=="enabled"
       enabled_scrum_stats = true if params[:settings]["show_in_scrum_stats"]=="enabled"
+      enabled_use_epicboard = true if params[:settings]["use_epicboard"]=="enabled"
     end
     settings = @project.rb_project_settings
     settings.show_stories_from_subprojects = enabled
     settings.show_in_scrum_stats = enabled_scrum_stats
+    settings.use_epicboard = enabled_use_epicboard
     if settings.save
       flash[:notice] = t(:rb_project_settings_updated)
     else

@@ -32,6 +32,11 @@
   <%= check_box_tag("settings[show_in_scrum_stats]", 'enabled',
       @project.rb_project_settings.show_in_scrum_stats) %>
 </p>
+<p>
+  <%= content_tag(:label, l(:backlogs_use_epicboard)) %>
+  <%= check_box_tag("settings[use_epicboard]", 'enabled',
+      @project.rb_project_settings.use_epicboard) %>
+</p>
 </div>
 <%= submit_tag(l(:button_save)) %>
 <% end %>

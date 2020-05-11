@@ -43,7 +43,7 @@ object_to_prepare.to_prepare do
 
   require_dependency 'backlogs_printable_cards'
   require_dependency 'linear_regression'
-  
+
   require_dependency 'backlogs_projects_helper_override'
   require_dependency 'backlogs_application_helper_override'
   require_dependency 'backlogs_queries_helper_override'
@@ -211,7 +211,7 @@ Redmine::Plugin.register :redmine_backlogs do
 
   menu :project_menu, :rb_sprints, { controller: :rb_sprints_roadmap, action: :index }, caption: :label_sprints, after: :roadmap, param: :project_id, if: Proc.new { Backlogs.configured? && Backlogs.setting[:show_sprint_as_roadmap] }
   menu :project_menu, :rb_master_backlogs, { controller: :rb_master_backlogs, action: :show }, caption: :label_backlogs, after: :rb_sprints, param: :project_id, if: Proc.new { Backlogs.configured? }
-  menu :project_menu, :rb_epicboards, { controller: :rb_epicboards, action: :show }, caption: :label_epics, after: :rb_master_backlogs, param: :project_id, if: Proc.new { Backlogs.configured? }
+  menu :project_menu, :rb_epicboards, { controller: :rb_epicboards, action: :show }, caption: :label_epics, after: :rb_master_backlogs, param: :project_id, if: Proc.new {|project| Backlogs.configured? && project && project.rb_project_settings.use_epicboard }
   menu :project_menu, :rb_taskboards, { controller: :rb_taskboards, action: :current }, caption: :label_task_board, after: :rb_epicboards, param: :project_id, if: Proc.new {|project| Backlogs.configured? && project && project.active_sprint }
   menu :project_menu, :rb_releases, { controller: :rb_releases, action: :index }, caption: :label_release_plural, after: :rb_taskboards, param: :project_id, if: Proc.new { Backlogs.configured? }
   menu :project_menu, :rb_genericboards, { controller: :rb_genericboards, action: :index },
