@@ -348,14 +348,16 @@ RB.Backlog = RB.Object.create({
       }
       tracker_total[story_tracker] += story.getPoints();
     });
+    var currentInSprint = this.updateseprator();
+
     var sprint_points = this.$.children('.header').find('.velocity');
     sprint_points.text(total);
     var tracker_summary = "<b>Tracker statistics</b><br />";
     for (var t in tracker_total) {
        tracker_summary += '<b>' + t + ':</b> ' + tracker_total[t] + '<br />';
     }
+    tracker_summary += '<b>Within capacity:</b> ' + currentInSprint + '<br />';
     sprint_points.qtip('option', 'content.text', tracker_summary);
-    this.updateseprator();
   },
 
   updateseprator: function(){
@@ -365,26 +367,28 @@ RB.Backlog = RB.Object.create({
       $(this).css('border-bottom','#AAAAAA 1px solid');
       $(this).css('border-top','');
     });
+    var totalpoint = 0.0;
     if (capacity > 0){
-      var totalpoint = 0.0;
       ularea.each(function () {
         var storypoint = RB.$(this).data('this').getPoints()
         var storyid = $(this).attr('story');
         if (!(storypoint === undefined || storypoint === null || (isNaN(storypoint)))) {
-          totalpoint += parseFloat(storypoint) || 0.0
+          curpoint = parseFloat(storypoint) || 0.0;
+          totalpoint += curpoint;
           if(capacity < totalpoint && (totalpoint > 0.0)){
+            totalpoint -= curpoint;
             if($("li#"+storyid).prev().length == 0) {
               $( "li#"+storyid).addClass("seperator-point").css('border-top','2px solid red');
-              return false;
             }
             else{
               $( "li#"+storyid).prev().addClass("seperator-point").css('border-bottom','2px solid red');
-              return false;
             }
+            return false;
           }
         }
       });
     }
+    return totalpoint;
   },
 
   showBurndownChart: function(event){
