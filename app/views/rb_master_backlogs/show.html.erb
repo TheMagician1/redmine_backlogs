@@ -71,11 +71,13 @@
 
 <%- content_for :breadcrumbs do %>
   <%= l(:label_master_backlog) %>
-  <%= breadcrumb_split %>
-  <%= link_to l(:label_epics), :controller => :rb_epicboards, :action => :show, :project_id => @project %>
+  <%- if Backlogs.configured? && @project && @project.rb_project_settings.use_epicboard%>
+    <%= breadcrumb_split %>
+    <%= link_to l(:label_epics), :controller => :rb_epicboards, :action => :show, :project_id => @project, :target => "_blank"%>
+  <%- end %>
   <%- if Backlogs.configured? && Backlogs.setting[:scaled_agile_enabled] %>
     <%= breadcrumb_split %>
-    <%= link_to l(:label_rb_genericboard_plural), :controller => :rb_genericboards, :action => :index, :project_id => @project %>
+    <%= link_to l(:label_rb_genericboard_plural), :controller => :rb_genericboards, :action => :index, :project_id => @project, :target => "_blank"%>
   <%- end %>
 <%- end %>
 

@@ -300,7 +300,7 @@ nl:
   tooltip_add_new_task: "Voeg nieuwe taak toe"
   tooltip_add_new_impediment: "Voeg nieuwe impediment toe"
   tooltip_copy_story_task: "Kopieer story- en taaknummer naar klembord"
-
+  backlogs_use_epicboard: "Gebruik epicbord"
 
   ######## release notes #######
   release_notes:

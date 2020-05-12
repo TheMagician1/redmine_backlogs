@@ -322,6 +322,7 @@ en:
   tooltip_add_new_task: "Add new task"
   tooltip_add_new_impediment: "Add new impediment"
   tooltip_copy_story_task: "Copy story and task number to clipboard"
+  backlogs_use_epicboard: "Use epicboard"
 
   ######## release notes #######
   release_notes:
