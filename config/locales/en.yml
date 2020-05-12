@@ -323,6 +323,7 @@ en:
   tooltip_add_new_impediment: "Add new impediment"
   tooltip_copy_story_task: "Copy story and task number to clipboard"
   backlogs_use_epicboard: "Use epicboard"
+  label_disclaimer_cache: "Due to caching, changing your settings here will only be visible with stories/tasks that change after saving this setting."
 
   ######## release notes #######
   release_notes:

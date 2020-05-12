@@ -79,7 +79,7 @@ module BacklogsPlugin
             snippet += '<div class="splitcontent">'
             snippet += '<div class="splitcontentleft">'
             snippet += "<div class=\"backlogs_storypoints attribute\"><div class=\"label\"><span>#{l(:field_story_points)}</span>:</div><div class=\"value\">#{RbStory.find(issue.id).points_display}</div></div>"
-			
+
             unless issue.rbteam_id.nil?
               team = Group.find(issue.rbteam_id)
               snippet += "<div class=\"backlogs_team attribute\"><div class=\"label\"><span>#{l(:field_team)}</span>:</div><div class=\"value\">#{team.name}</div></div>"
@@ -87,7 +87,7 @@ module BacklogsPlugin
             snippet += '</div>'
 
             snippet += '<div class="splitcontentleft">'
-            
+
             if Backlogs.setting[:use_remaining_hours]
               unless issue.remaining_hours.nil?
                 snippet += "<div class=\"backlogs_remaining_hours attribute\"><div class=\"label\"><span>#{l(:field_remaining_hours)}</span>:</div><div class=\"value\">#{l_hours(issue.remaining_hours)}</div></div>"
@@ -198,7 +198,7 @@ module BacklogsPlugin
 
       def view_issues_context_menu_end(context={ })
       end
-      
+
       def view_issues_show_description_bottom(context)
         issue, controller = context[:issue], context[:controller]
 
@@ -276,6 +276,9 @@ module BacklogsPlugin
             </fieldset>
             <fieldset class="box tabular">
             <h3>#{l(:label_backlogs)}</h3>
+            <p>
+              #{l(:label_disclaimer_cache)}
+            </p>
             <p>
               #{label :backlogs, l(:field_task_color)}
               #{text_field :backlogs, :task_color, value: context[:user].backlogs_preference[:task_color]}
@@ -427,7 +430,7 @@ module BacklogsPlugin
           end
         end
       end
-      
+
       def helper_issues_show_detail_after_setting(context= { })
         detail = context[:detail]
         return unless detail.property == "RbRelease"
@@ -444,7 +447,7 @@ module BacklogsPlugin
         end
         detail.value = writevalue if detail.value
         detail.old_value = writevalue if detail.old_value
-        
+
         context[:detail] = detail
       end
 

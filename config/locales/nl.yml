@@ -301,6 +301,7 @@ nl:
   tooltip_add_new_impediment: "Voeg nieuwe impediment toe"
   tooltip_copy_story_task: "Kopieer story- en taaknummer naar klembord"
   backlogs_use_epicboard: "Gebruik epicbord"
+  label_disclaimer_cache: "Doordat er gebruik gemaakt wordt van caching, worden de wijzigingen die hier gedaan worden alleen toegepast op stories/taken die na het opslaan van de instelling worden gewijzigd."
 
   ######## release notes #######
   release_notes:
