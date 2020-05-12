@@ -297,8 +297,8 @@ nl:
   backlogs_validating_statuses: "Stories met de volgende status worden geteld:"
   backlogs_status_for_validating_explanation: "Story status die refinement/validatie aangeeft voordat de story de sprint in gaat. Er wordt een lijst van stories gegroepeerd op toegewezen aan gegenereerd wanneer je naar issues toe gaat en in de zijbalk op 'Stories om te refinen' klikt."
   backlogs_release_date_not_set: "(niet ingesteld)"
-  add_new_task: "Voeg nieuwe taak toe"
-  add_new_impediment: "Voeg nieuwe impediment toe"
+  tooltip_add_new_task: "Voeg nieuwe taak toe"
+  tooltip_add_new_impediment: "Voeg nieuwe impediment toe"
   tooltip_copy_story_task: "Kopieer story- en taaknummer naar klembord"
 
 
