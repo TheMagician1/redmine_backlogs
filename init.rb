@@ -32,6 +32,7 @@ object_to_prepare.to_prepare do
   require_dependency 'backlogs_project_patch'
   require_dependency 'backlogs_user_patch'
   require_dependency 'backlogs_custom_field_patch'
+  require_dependency 'backlogs_time_entry_patch'
 
   require_dependency 'backlogs_my_controller_patch'
   require_dependency 'backlogs_issues_controller_patch'
