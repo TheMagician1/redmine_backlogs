@@ -49,9 +49,9 @@
       <%= render :partial => "backlogs/model_errors", :object => task.errors unless task.errors.empty? %>
       <textarea id="task_copy_<%= id_or_empty(task) %>">
 <%- if task.story %>
-<%= tracker_name_or_empty(task.story) %> #<%= task.story.id %>
+<%= tracker_name_or_empty(task.story) %>: #<%= task.story.id %>
 <%- end %>
-<%= tracker_name_or_empty(task) %> #<%= id_or_empty(task) %></textarea>
+<%= tracker_name_or_empty(task) %>: #<%= id_or_empty(task) %></textarea>
     </div>
   </div>
 <% end %>
