@@ -87,7 +87,7 @@
     <tr>
       <td><div class="label_sprint_impediments">
             <% if User.current.allowed_to?(:create_impediments, @project) %>
-            <span class="fas fa-plus-circle add_new" title="<%= l("add_new_impediment") %>"></span>
+            <span class="fas fa-plus-circle add_new" title="<%= l(:tooltip_add_new_impediment) %>"></span>
             <% end %>
             <%= l(:label_sprint_impediments) %>
       </div></td>

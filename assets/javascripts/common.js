@@ -163,3 +163,16 @@ RB.util = {
     });
   }
 }
+
+function copy_story_task_clipboard(copyElement) {
+  const el = document.createElement('textarea');
+  el.value = copyElement.value;
+  el.setAttribute('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild(el);
+  el.select();
+  el.setSelectionRange(0, 99999); /*For mobile devices*/
+  document.execCommand('copy');
+  document.body.removeChild(el);
+}

@@ -4,6 +4,8 @@
       qtip_cls = "story_tooltip_ajax" unless defined?(render_tooltip)  %>
     <div class="id <%= qtip_cls %>">
       <div class="tooltip_text"><%= render :partial => "rb_stories/tooltip", :object => task if defined?(render_tooltip) %></div>
+      <span class="fas fa-copy copy_story_task prevent_edit" onclick="copy_story_task_clipboard(task_copy_<%= id_or_empty(task) %>)"
+       title="<%= l(:tooltip_copy_story_task)%>"></span>
       <div class="t"><%= issue_link_or_empty(task) %></div>
       <div class="v"><%= id_or_empty(task) %></div>
     </div>
@@ -45,6 +47,11 @@
       <div class="user_status"><%= task.author == User.current ? '+' : '-' %>c<%= task.assigned_to == User.current ? '+' : '-' %>a</div>
       <div class="tracker_id"><%= tracker_id_or_empty(task) %></div>
       <%= render :partial => "backlogs/model_errors", :object => task.errors unless task.errors.empty? %>
+      <textarea id="task_copy_<%= id_or_empty(task) %>">
+<%- if task.story %>
+<%= tracker_name_or_empty(task.story) %> #<%= task.story.id %>
+<%- end %>
+<%= tracker_name_or_empty(task) %> #<%= id_or_empty(task) %></textarea>
     </div>
   </div>
 <% end %>

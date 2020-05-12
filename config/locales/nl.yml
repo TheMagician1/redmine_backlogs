@@ -299,6 +299,7 @@ nl:
   backlogs_release_date_not_set: "(niet ingesteld)"
   add_new_task: "Voeg nieuwe taak toe"
   add_new_impediment: "Voeg nieuwe impediment toe"
+  tooltip_copy_story_task: "Kopieer story- en taaknummer naar klembord"
 
 
   ######## release notes #######

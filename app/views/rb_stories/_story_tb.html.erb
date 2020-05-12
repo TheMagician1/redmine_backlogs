@@ -5,7 +5,7 @@
     <%= link_to story.id, {:controller => 'issues', :action => 'show', :id => story.id}, { :target => "_blank" } %>
     <div class="v"><%= story.id %></div>
     <%- if User.current.allowed_to?(:create_tasks, @project) %>
-    <span class="fas fa-plus-circle add_new" title="<%= l("add_new_task") %>"></span>
+    <span class="fas fa-plus-circle add_new" title="<%= l(:tooltip_add_new_task) %>"></span>
     <%- end %>
 	<span class="assignee"><%= assignee_name_or_empty(story) %></span>
     <%- if Backlogs.setting[:use_remaining_hours] %>

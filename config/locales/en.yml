@@ -319,8 +319,9 @@ en:
   backlogs_validating_statuses: "Stories with the following status are counted:"
   backlogs_status_for_validating_explanation: "Story statuses that represent refinement/validation before approved for sprint start. A list of stories to be refined grouped by assigned to is generated when you go to issues an in the side bar click on 'Stories to be refined'"
   backlogs_release_date_not_set: "(not set)"
-  add_new_task: "Add new task"
-  add_new_impediment: "Add new impediment"
+  tooltip_add_new_task: "Add new task"
+  tooltip_add_new_impediment: "Add new impediment"
+  tooltip_copy_story_task: "Copy story and task number to clipboard"
 
   ######## release notes #######
   release_notes:

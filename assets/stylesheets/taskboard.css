@@ -103,7 +103,7 @@ See RB.Taskboard.initialize()
 }
 .board .add_new:hover{
   cursor:pointer;
-  background-color:#ffffcc;
+  background-color:#ffff00;
 }
 
 .story,
@@ -301,8 +301,21 @@ See RB.Taskboard.initialize()
   text-align:right;
   width:82px;
 }
+
 .issue .id .v{
-  display:none;
+  display: none;
+}
+.issue .id .t{
+  display: inline-block;
+}
+.issue .id .copy_story_task {
+  cursor: pointer;
+  display: inline-block;
+  color: #555555;
+}
+.issue .id .copy_story_task:hover {
+  background-color: #ffff00;
+  color: black;
 }
 .issue .id a{
   opacity:1.0;
