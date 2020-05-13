@@ -420,7 +420,7 @@ color: #{front_color};"
 
   # def_rb_partial_method 'render_rb_task(task)', 'rb_tasks/_task.html.erb'
   def render_rb_task(task)
-    render partial: 'rb_tasks/task', locals: { task: task }, cached: true
+    render partial: 'rb_tasks/task', locals: { task: task }
   end
 
   def render_rb_task_collection(tasks)

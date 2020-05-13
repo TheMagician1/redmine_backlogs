@@ -1,57 +1,55 @@
-<% cache task do %>
-  <div class="model issue task <%= mark_if_closed(task) %>" id="issue_<%= task.id %>" <%= build_inline_style(task).html_safe %>>
-    <%- qtip_cls = "story_tooltip"
-      qtip_cls = "story_tooltip_ajax" unless defined?(render_tooltip)  %>
-    <div class="id <%= qtip_cls %>">
-      <div class="tooltip_text"><%= render :partial => "rb_stories/tooltip", :object => task if defined?(render_tooltip) %></div>
-      <span class="fas fa-copy copy_story_task prevent_edit" onclick="copy_story_task_clipboard(task_copy_<%= id_or_empty(task) %>)"
+<div class="model issue task <%= mark_if_closed(task) %>" id="issue_<%= task.id %>" <%= build_inline_style(task).html_safe %>>
+  <%- qtip_cls = "story_tooltip"
+     qtip_cls = "story_tooltip_ajax" unless defined?(render_tooltip)  %>
+  <div class="id <%= qtip_cls %>">
+    <div class="tooltip_text"><%= render :partial => "rb_stories/tooltip", :object => task if defined?(render_tooltip) %></div>
+    <span class="fas fa-copy copy_story_task prevent_edit" onclick="copy_story_task_clipboard(task_copy_<%= id_or_empty(task) %>)"
        title="<%= l(:tooltip_copy_story_task)%>"></span>
-      <div class="t"><%= issue_link_or_empty(task) %></div>
-      <div class="v"><%= id_or_empty(task) %></div>
+    <div class="t"><%= issue_link_or_empty(task) %></div>
+    <div class="v"><%= id_or_empty(task) %></div>
+  </div>
+  <div class="subject editable" fieldtype="textarea" fieldname="subject" fieldlabel="<%=l(:field_subject)%>"><%= h task.subject %></div>
+  <div class="description editable" style="display: none" fieldtype="textarea" fieldname="description" fieldlabel="<%=l(:field_description)%>"><%= h task.description %></div>
+  <div class="assigned_to_id editable" fieldtype="select" fieldname="assigned_to_id" fieldlabel="<%=l(:field_assigned_to)%>">
+    <div class="t"><%= assignee_name_or_empty(task) %></div>
+    <div class="v"><%= assignee_id_or_empty(task) %></div>
+  </div>
+  <%- if Backlogs.settings[:show_priority] || task.priority_id != IssuePriority.default.id %>
+    <div class="priority_id editable"  fieldtype="select"  fieldname="priority_id" fieldlabel="<%=l(:field_priority)%>">
+      <div class="t"><%= h task.priority.name %></div>
+      <div class="v"><%= task.priority_id %></div>
     </div>
-    <div class="subject editable" fieldtype="textarea" fieldname="subject" fieldlabel="<%=l(:field_subject)%>"><%= h task.subject %></div>
-    <div class="description editable" style="display: none" fieldtype="textarea" fieldname="description" fieldlabel="<%=l(:field_description)%>"><%= h task.description %></div>
-    <div class="assigned_to_id editable" fieldtype="select" fieldname="assigned_to_id" fieldlabel="<%=l(:field_assigned_to)%>">
-      <div class="t"><%= assignee_name_or_empty(task) %></div>
-      <div class="v"><%= assignee_id_or_empty(task) %></div>
-    </div>
-    <%- if Backlogs.settings[:show_priority] || task.priority_id != IssuePriority.default.id %>
-      <div class="priority_id editable"  fieldtype="select"  fieldname="priority_id" fieldlabel="<%=l(:field_priority)%>">
-        <div class="t"><%= h task.priority.name %></div>
-        <div class="v"><%= task.priority_id %></div>
+  <%- end %>
+  <div class="spent_hours" fieldname="spent_hours" readonly fieldlabel="<%= l(:field_total_spent_hours) %>"><%= spent_hours_or_empty(task) %></div>
+  <%- if User.current.allowed_to?(:update_remaining_hours, @project) && Backlogs.setting[:use_remaining_hours] %>
+    <div class="remaining_hours editable" fieldname="remaining_hours" fieldlabel="<%=l(:field_remaining_hours)%>"><%= remaining_hours_or_empty(task) %></div>
+  <%- end %>
+  <%- if User.current.allowed_to?(:log_time, @project) && Backlogs.setting[:timelog_from_taskboard] == 'enabled' %>
+    <div class="time_entry_hours editable" style="display: none" fieldname="time_entry_hours" fieldlabel="<%=l(:field_time_entry_hours)%>"></div>
+    <%- if User.current.allowed_to?(:edit_time_entries, @project) %>
+      <div class="time_entry_user_id editable" fieldtype="select" fieldname="time_entry_user_id" fieldlabel="<%=l(:field_time_entry_user_id)%>">
+        <div class="v" style="display: none" ><%= assignee_id_or_empty(task) %></div>
       </div>
     <%- end %>
-    <div class="spent_hours" fieldname="spent_hours" readonly fieldlabel="<%= l(:field_total_spent_hours) %>"><%= spent_hours_or_empty(task) %></div>
-    <%- if User.current.allowed_to?(:update_remaining_hours, @project) && Backlogs.setting[:use_remaining_hours] %>
-      <div class="remaining_hours editable" fieldname="remaining_hours" fieldlabel="<%=l(:field_remaining_hours)%>"><%= remaining_hours_or_empty(task) %></div>
-    <%- end %>
-    <%- if User.current.allowed_to?(:log_time, @project) && Backlogs.setting[:timelog_from_taskboard] == 'enabled' %>
-      <div class="time_entry_hours editable" style="display: none" fieldname="time_entry_hours" fieldlabel="<%=l(:field_time_entry_hours)%>"></div>
-      <%- if User.current.allowed_to?(:edit_time_entries, @project) %>
-        <div class="time_entry_user_id editable" fieldtype="select" fieldname="time_entry_user_id" fieldlabel="<%=l(:field_time_entry_user_id)%>">
-          <div class="v" style="display: none" ><%= assignee_id_or_empty(task) %></div>
-        </div>
-      <%- end %>
-      <div class="time_entry_activity_id editable"  style="display: none" fieldtype="select" fieldname="time_entry_activity_id" fieldlabel="<%= l(:field_time_entry_activity) %>">
-        <div class="t"><%= h TimeEntryActivity.default ? TimeEntryActivity.default.name : "" %></div>
-        <div class="v"><%= TimeEntryActivity.default ? TimeEntryActivity.default.id : "" %></div>
-      </div>
-      <div class="Time_entry_spent_on editable date" fieldname="time_entry_spent_on" fieldlabel="<%=l(:field_time_entry_spend_on)%>" style="display:none"><%= Date.today %></div>
-      <div class="Time_entry_comments editable" fieldtype=textarea fieldname="time_entry_comments" fieldlabel="<%=l(:field_time_entry_comments)%>"></div>
-    <%- end %>
-    <div class="indicator"> </div>
-    <div class="meta">
-      <div class="story_id"><%= task.story ? task.story.id : '' %></div>
-      <div class="status_id"><%= task.status_id %></div>
-      <div class="project_id"><%= task.project_id %></div>
-      <div class="user_status"><%= task.author == User.current ? '+' : '-' %>c<%= task.assigned_to == User.current ? '+' : '-' %>a</div>
-      <div class="tracker_id"><%= tracker_id_or_empty(task) %></div>
-      <%= render :partial => "backlogs/model_errors", :object => task.errors unless task.errors.empty? %>
+    <div class="time_entry_activity_id editable"  style="display: none" fieldtype="select" fieldname="time_entry_activity_id" fieldlabel="<%= l(:field_time_entry_activity) %>">
+      <div class="t"><%= h TimeEntryActivity.default ? TimeEntryActivity.default.name : "" %></div>
+      <div class="v"><%= TimeEntryActivity.default ? TimeEntryActivity.default.id : "" %></div>
+    </div>
+    <div class="Time_entry_spent_on editable date" fieldname="time_entry_spent_on" fieldlabel="<%=l(:field_time_entry_spend_on)%>" style="display:none"><%= Date.today %></div>
+    <div class="Time_entry_comments editable" fieldtype=textarea fieldname="time_entry_comments" fieldlabel="<%=l(:field_time_entry_comments)%>"></div>
+  <%- end %>
+  <div class="indicator"> </div>
+  <div class="meta">
+    <div class="story_id"><%= task.story ? task.story.id : '' %></div>
+    <div class="status_id"><%= task.status_id %></div>
+    <div class="project_id"><%= task.project_id %></div>
+    <div class="user_status"><%= task.author == User.current ? '+' : '-' %>c<%= task.assigned_to == User.current ? '+' : '-' %>a</div>
+    <div class="tracker_id"><%= tracker_id_or_empty(task) %></div>
+    <%= render :partial => "backlogs/model_errors", :object => task.errors unless task.errors.empty? %>
       <textarea id="task_copy_<%= id_or_empty(task) %>">
 <%- if task.story %>
 <%= tracker_name_or_empty(task.story) %>: #<%= task.story.id %>
 <%- end %>
 <%= tracker_name_or_empty(task) %>: #<%= id_or_empty(task) %></textarea>
-    </div>
   </div>
-<% end %>
+</div>
